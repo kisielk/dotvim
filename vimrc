@@ -1,8 +1,7 @@
 " Basic Vim settings "{{{
 set nocompatible
 filetype off " Reset if set by a system-wide config
-call pathogen#runtime_append_all_bundles() " Load plugins from pathogen
-call pathogen#helptags()
+call pathogen#infect() " Enable pathogen
 filetype plugin indent on " Enable filetype specific things
 "}}}
 
