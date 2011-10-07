@@ -1,0 +1,544 @@
+*HTML.txt*	Set of HTML macros, menus and toolbar buttons.
+		Last change: 2001 November 29
+		Written by Christian J. Robinson
+
+
+						*HTML.vim* *HTML-macros*
+Set of HTML macros, menus, and toolbar buttons to make editing HTML files
+easier.  The original Copyright should probably go to Doug Renze, though most
+of his efforts have been modified in this implementation.  All the changes are
+Copyright Christian J. Robinson under the terms of the GNU GPL.
+
+
+------------------------------------------------------------------------------
+
+1. Introduction.			|html-intro|
+2. Mappings for normal <> tags.		|html-tags|		
+3. Mappings for &...; codes, such as &lt; &gt; &amp; and so on.
+					|character-codes|
+4. The HTML template.			|html-template|
+5. How to use browser mappings.		|browser-control|
+6. Miscellaneous extras.		|html-misc|
+
+==============================================================================
+1. Introduction.					*html-intro*
+
+To start, you should familiarize yourself with Vim enough to know the
+terminology, and you should know HTML to some degree.
+
+If you use Vim 6, the mappings are local to the buffer the script was sourced
+from, and the menu & toolbar are active only for buffers the script was
+sourced from.
+
+I note the modes in which the various mappings work inside curly braces ({}).
+All the mappings appear within **'s, which are not typed.
+
+									*;;*
+{Normal, Insert, Visual} ~
+My mappings start with ; or &, aside from the tab mapping.  I have mapped ;;
+to insert a single ; character in insert mode, and behave like a single ; in
+normal mode.
+
+					*html-<TAB>* *html-tab* *html-CTRL-I*
+{Normal, Insert} ~
+In Vim6, if you're on a closing tag the tab key jumps you after the tag.
+Otherwise the tab key will jump you to an unfilled tag somewhere in the file.
+For example, if you had the tag:
+>
+  <A HREF=""></A>
+<
+And you hit tab, your cursor would be placed on the second " so you could
+insert text easily.  Next time you hit tab it would be placed on the <
+character of </A>.  Under Vim 6, this works for tags split across lines,
+such as:
+>
+  <TABLE>
+  </TABLE>
+<
+In Vim6, if this search fails and your cursor is on the start of an end tag,
+it will jump your cursor position to after the tag.
+
+I think the use of tab is acceptable because I don't like the idea of hard
+tabs or indentation greater than one or two spaces in HTML.
+
+						*;<tab>* *;tab* *;CTRL-I*
+If you want to insert a hard tab, use ;<tab> (; then the tab key).
+
+==============================================================================
+2. Mappings for normal <> tags.				*html-tags*
+
+Most of these mappings are insert or visual mappings.  In insert mode the tag
+is inserted and the cursor placed where you'd likely want to insert text.  In
+visual mode, the tag is wrapped around the visually selected text somehow.
+
+
+								*;4*
+{Normal} ~
+Insert <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN"> at the top of the
+file.
+								*;cm*
+{Insert, Visual} ~
+Comment tag (<!-- -->).
+								*;ah*
+{Insert, Visual} ~
+Anchor hyperlink (<A HREF=""></A>).  Visual mode puts the visually selected
+text <A HREF="">here</A> and positions the cursor on the second ".
+								*;aH*
+{Visual} ~
+Same as ;ah, but puts the visually selected text <A HREF="here"> and places
+the cursor on the < of </A>.
+								*;an* *;aN*
+{Insert, Visual} ~
+Same as the ;ah and ;aH mappings, but uses NAME instead of HREF.
+								*;ab*
+{Insert, Visual} ~
+Abbreviation  (<ABBR TITLE=""></ABBR>).  Visual mode puts the visually
+selected text <ABBR TITLE="">here</ABBR> and positions the curosr on the
+second ".
+								*;aB*
+{Visual} ~
+Same as ;ab, but puts the visually selected text <ABBR TITLE="here"> and
+places the curosr on the < of </ABBREV>
+								*;ac* *;aC*
+{Insert, Visual} ~
+Acronym (<ACRONYM TITLE=""></ACRONYM>).  Similar to the ;ab and ;aB mappings,
+but uses ACRONYM instead of ABBR.
+								*;ad*
+{Insert, Visual} ~
+Address (<ADDRESS></ADDRESS>).
+								*;bo*
+{Insert, Visual} ~
+Boldfaced Text (<B></B>).
+								*;bh*
+{Insert} ~
+Base URL (<BASE HREF="">).
+								*;bl*
+{Insert, Visual} ~
+Block quote (<BLOCKQUOTE><CR></BLOCKQUOTE>).
+								*;bd*
+{Insert, Visual} ~
+Body (<BODY><CR></BODY>).
+								*;br*
+{Insert} ~
+Line break (<BR>).
+								*;ce*
+{Insert} ~
+Center (<CENTER></CENTER>).
+								*;ci*
+{Insert, Visual} ~
+Cite (<CITE></CITE>).
+								*;co*
+{Insert, Visual} ~
+Code (<CODE></CODE>).
+
+
+						*html-definition-list*
+								*;dl*
+{Insert, Visual} ~
+Definition list (<DL><CR></DL>).
+								*;dt*
+{Insert} ~
+Definition term (<DT>).
+								*;dd*
+{Insert} ~
+Definition body (<DD>).
+
+								*;de*
+{Insert, Visual} ~
+Deleted text (<DEL></DEL>).
+								*;df*
+{Insert, Visual} ~
+Defining instance (<DFN></DFN>).
+								*;dv*
+{Insert, Visual} ~
+Document Division (<DIV><CR></DIV>).
+								*;em*
+{Insert, Visual} ~
+Emphasize (<EM></EM>).
+								*;fo*
+{Insert, Visual} ~
+Font size (<FONT SIZE=></FONT>).
+								*;fc*
+{Insert, Visual} ~
+Font color (<FONT COLOR=></FONT>).
+
+			*html-headers* *;h1* *;h2* *;h3* *;h4* *;h5* *;h6*
+{Insert, Visual} ~
+Headers, levels 1-6 (<H_></H_>).
+								*;he*
+{Insert, Visual} ~
+Head (<HEAD><CR></HEAD>).
+								*;hr*
+{Insert} ~
+Horizontal rule (<HR>).
+								*;ht*
+{Insert, Visual} ~
+HTML document (<HTML><CR></HTML>).
+								*;it*
+{Insert, Visual} ~
+Italicized text (<I></I>).
+								*;im*
+{Insert, Visual} ~
+Image (<IMG SRC="" ALT="").  Places the cursor on the second " of the SRC="".
+In visual mode it puts the visually selected text <IMG SRC="" ALT="here">
+and places the cursor on the second " of the SRC="".
+								*;ii*
+{Insert} ~
+Identifies index (<ISINDEX>).
+								*;li*
+{Insert} ~
+List item (<LI>) inside <UL> or <OL>.
+								*;lk*
+{Insert, Visual} ~
+Link, inside the header (<LINK HREF="">).
+								*;lh*
+{Insert} ~
+List header (<LH>) inside <UL> or <OL>.
+								*;me*
+{Insert, Visual} ~
+Meta information (<META NAME="" CONTENT="").  Places the cursor on the second
+" of NAME="".  Visual mode puts the visually selected text <META NAME="here"
+CONTENT=""> and places the cursor on the second " of CONTENT="".
+								*;mE*
+{Visual} ~
+Same as ;me, but puts the visually selected text <META NAME="" CONTENT="here">
+and places the cursor on the second " of NAME="".
+								*;ol*
+{Insert, Visual} ~
+Ordered (numbered) list (<OL><CR></OL>).
+								*;pp*
+{Insert, Visual} ~
+Paragraph (<P><CR></P>).
+								*;pr*
+{Insert, Visual} ~
+Preformatted text (<PRE><CR></PRE>).
+								*;sk*
+{Insert, Visual} ~
+Strikethrough (<STRIKE></STRIKE>).
+								*;sn*
+{Insert, Visual} ~
+Span (<SPAN></SPAN>).
+								*;sa*
+{Insert, Visual} ~
+Sample text (<SAMP></SAMP>).
+								*;st*
+{Insert, Visual} ~
+Strong text (<STRONG></STRONG>).
+								*;cs*
+{Insert} ~
+CSS Style (<STYLE TYPE="text/css"><CR><!--  --><CR></STYLE>).
+								*;ls*
+{Insert, Visual} ~
+Linked CSS stylesheet (<LINK REL="stylesheet" TYPE="text/css" HREF="">).
+								*;sb*
+{Insert, Visual} ~
+Subscript (<SUB></SUB>).
+								*;sp*
+{Insert, Visual} ~
+Superscript (<SUP></SUP>).
+								*;ti*
+{Insert, Visual} ~
+Title (<TITLE></TITLE>).
+								*;un*
+{Insert, Visual} ~
+Underlined text (<U></U>).
+								*;ul*
+{Insert, Visual} ~
+Unordered list (<UL><CR></UL>).
+
+							*html-table*
+								*;ta*
+{Normal, Insert, Visual} ~
+Table (<TABLE><CR></TABLE>).  In normal mode, you will be interactively
+prompted for the table rows, columns, and border width.
+								*;ca*
+{Insert, Visual} ~
+Caption (<CAPTION></CAPTION>).
+								*;tr*
+{Insert, Visual} ~
+Table row (<TR><CR></TR>).
+								*;td*
+{Insert, Visual} ~
+Table data (column element) (<TD><CR></TD>).
+								*;th*
+{Insert, Visual} ~
+Table header (<TH></TH>).
+
+							*html-frames*
+								*;fs*
+{Insert} ~
+Frame layout (<FRAMESET ROWS="" COLS=""><CR></FRAMESET>).
+								*;fr*
+{Insert} ~
+Frame source (<FRAME SRC="">).
+								*;nf*
+{Insert} ~
+Text to display if for a browser that can't display frames
+(<NOFRAMES><CR></NOFRAMES>).
+								*;if*
+{Insert, Visual} ~
+Inline frame (<IFRAME SRC=""><CR></IFRAME>).
+
+							*html-forms*
+								*;fm*
+{Insert, Visual} ~
+Forms (<FORM ACTION=""><CR></FORM>).
+								*;bu*
+{Insert, Visual} ~
+Form button (<INPUT TYPE=BUTTON NAME="" VALUE="">).
+								*;ch*
+{Insert, Visual} ~
+Form checkbox (<INPUT TYPE=CHECKBOX NAME="" VALUE="">).
+								*;ra*
+{Insert, Visual} ~
+Form radiobutton (<INPUT TYPE=RADIO NAME="" VALUE="">).
+								*;hi*
+{Insert, Visual} ~
+Hidden form data (<INPUT TYPE=HIDDEN NAME="" VALUE="">).
+								*;pa*
+{Insert, Visual} ~
+Form password input field (<INPUT TYPE=PASSWORD NAME="" VALUE="">).
+								*;te*
+{Insert, Visual} ~
+Form text input field (<INPUT TYPE=TEXT NAME="" VALUE="">).
+								*;se*
+{Insert, Visual} ~
+Form selection box (<SELECT NAME=""><CR></SELECT>).
+								*;ms*
+{Insert, Visual} ~
+Form multiple selection box (<SELECT NAME="" MULTIPLE><CR></SELECT>).
+								*;op*
+{Insert} ~
+Form selection option (<OPTION>).
+								*;og*
+{Insert, Visual} ~
+Form option group (<OPTGROUP LABEL=""><CR></OPTGROUP>).
+								*;tx*
+{Insert, Visual} ~
+Form text input area (<TEXTAREA NAME="" ROWS=10 COLS=50><CR></TEXTAREA>).
+								*;su*
+{Insert} ~
+Form submit button (<INPUT TYPE=SUBMIT>).
+								*;re*
+{Insert} ~
+Form reset button (<INPUT TYPE=RESET>).
+
+==============================================================================
+3. Mappings for &...; codes.		*character-codes* *character-entities*
+
+A number of mappings have been defined to allow you to insert special
+characters into your HTML document.  These are known as characters entities.
+They start with & and work insert mode only.
+
+Ampersand (&)			*&&*
+Greaterthan (>)			*&>*
+Lessthan (<)			*&<*
+Space (nonbreaking)		*&<space>* *;<space>*
+Quotation mark (")		*&'*
+Cent				*&c\|*
+Pound				*&#*
+Yen				*&Y=*
+Left Angle Quote		*&2<*
+Right Angle Quote		*&2>*
+Copyright			*&cO*
+Registered			*&rO*
+Multiply			*&x*
+Divide				*&/*
+Inverted Exlamation		*&!*
+Inverted Question		*&?*
+Degree				*&de*
+Micro/Greek mu			*&mu*
+Paragraph			*&pa*
+Middle Dot			*&.*
+A-grave				*&A`*
+a-grave				*&a`*
+E-grave				*&E`*
+e-grave				*&e`*
+I-grave				*&I`*
+i-grave				*&i`*
+O-grave				*&O`*
+o-grave				*&o`*
+U-grave				*&U`*
+u-grave				*&u`*
+A-acute				*&A'*
+a-acute				*&a'*
+E-acute				*&E'*
+e-acute				*&e'*
+I-acute				*&I'*
+i-acute				*&i'*
+O-acute				*&O'*
+o-acute				*&o'*
+U-acute				*&U'*
+u-acute				*&u'*
+Y-acute				*&Y'*
+y-acute				*&y'*
+A-tilde				*&A~*
+a-tilde				*&a~*
+N-tilde				*&N~*
+n-tilde				*&n~*
+O-tilde				*&O~*
+o-tilde				*&o~*
+A-circumflex			*&A^*
+a-circumflex			*&a^*
+E-circumflex			*&E^*
+e-circumflex			*&e^*
+I-circumflex			*&I^*
+i-circumflex			*&i^*
+O-circumflex			*&O^*
+o-circumflex			*&o^*
+U-circumflex			*&U^*
+u-circumflex			*&u^*
+A-umlaut			*&A"*
+a-umlaut			*&a"*
+E-umlaut			*&E"*
+e-umlaut			*&e"*
+I-umlaut			*&I"*
+i-umlaut			*&i"*
+O-umlaut			*&O"*
+o-umlaut			*&o"*
+U-umlaut			*&U"*
+u-umlaut			*&u"*
+y-umlaut			*&y"*
+Umlaut				*&"*
+A-ring				*&Ao*
+a-ring				*&ao*
+AE-ligature			*&AE*
+ae-ligature			*&ae*
+C-cedilla			*&C,*
+c-cedilla			*&c,*
+O-slash				*&O/*
+o-slash				*&o/*
+
+==============================================================================
+4. The HTML template.					*html-template*
+
+								*;html*
+{Normal} ~
+The ;html macro inserts a basic template for you.  If you already have data in
+the file, it asks you if you want to replace it or add the template anyway.
+
+							*customize-template*
+You can set some Vim variables to control some of the fields in the HTML
+template:
+
+*html_authorname* is inserted inside <META NAME="Author" CONTENT="...">
+*html_authoremail* is inserted inside <LINK REV="made" HREF="mailto:...">
+
+These two variables are also used for the <ADDRESS></ADDRESS> section of the
+template.  There is no default for these variables.
+
+
+*html_textcolor* *html_linkcolor* *html_alinkcolor* *html_vlinkcolor*
+These control the <BODY> tag in the template.  They default to:
+ html_bgcolor     = #FFFFFF
+ html_textcolor   = #000000
+ html_linkcolor   = #0000EE
+ html_alinkcolor  = #FF0000
+ html_vlinkcolor  = #990066
+So you get:
+ <BODY BGCOLOR="#FFFFFF" TEXT="#000000" LINK="#0000EE" ALINK="#FF0000" VLINK="#990066">
+
+
+==============================================================================
+5. How to use browser mappings.				*browser-control*
+
+You can use a browser to preview your current HTML document.
+
+For Unix, you need the browser_launcher.vim script that's available the same
+place as HTML.vim.  Place it in the same directory as HTML.vim and it will
+automatically be sourced when HTML.vim is sourced.
+
+For Windows:
+								*;ie*
+{Normal} ~
+Call Explorer on the current file.
+
+(Currently I do not have access to a Windows machine running anything but
+Internet Explorer, so controls for other browsers under Windows don't exist
+yet.)
+
+For Unix:
+								*;ns*
+{Normal} ~
+Make Netscape view current file, starting Netscape if it's not running.
+								*;nns*
+{Normal} ~
+Same as ;ns, but start a new browser window.
+								*;oa*
+{Normal} ~
+Make Opera view current file, starting Opera if it's not running.
+								*;noa*
+{Normal} ~
+Same as ;oa, but start a new browser window.
+								*;ly*
+{Normal} ~
+Use lynx to view your document.  This happens anyway if there's no DISPLAY
+environmental variable.
+								*;nly*
+{Normal} ~
+Same as ;ly, but in an xterm.  This happens with the ;ly macro if you're in
+the Vim GUI.
+
+
+==============================================================================
+6. Miscellaneous extras.				*html-misc*
+
+
+Functions used by the HTML mappings:			*html-functions*
+------------------------------------
+
+							*HTMLmap()*
+HTMLmap({maptype}, {lhs}, {rhs})
+		This function defines a mapping, local to the buffer and
+		silent if you're using Vim 6 or later.  {maptype} is any map
+		command.  {lhs} and {rhs} are equivalent to :map arguments,
+		see |map.txt|.  This is useful for autocommands.
+
+							*SetIfUnset()*
+SetIfUnset({variable}, {value})
+		This function sets {variable} to {value} if the variable isn't
+		already set.  A {value} of "-" makes sure the variable is set
+		with an empty string.
+
+							*GenerateTable()*
+GenerateTable()	This is normally called by the normal mapping |;ta|, but it
+		works the same if you call it any other way.
+
+							*HTMLinput()*
+HTMLinput({prompt} [, {default}])
+		This function calls input({prompt}) for Vim 5, and
+		inputdialog({prompt} [, {default}]) for Vim 6.
+
+							*HTMLtemplate()*
+HTMLtemplate()
+		This is normally called by the normal mapping |;html|, but it
+		works the same if you call it any other way.
+
+							*HTMLtemplate2()*
+HTMLtemplate2()	This is called by |HTMLtemplate()|.
+
+							*NextInsertPoint()*
+NextInsertPoint({mode})
+		This is normally called by the |html-<TAB>| mapping, but it
+		works the same if you call it any other way.  The {mode}
+		argument is either 'i' or 'n'.  It is only significant for
+		Vim6; in insert mode, if you're on a closing tag, it jumps you
+		after the tag.
+
+
+==============================================================================
+Currently undefined:
+							*HTMLstartExplorer()*
+HTMLstartExplorer({file})
+		This is normally called by the |;ie| mapping, but it
+		works the same if you call it any other way.  It just tries to
+		start internet explorer on the filename argument.  If that
+		fails, it tries explorer on the file instead.
+
+							*html_internet_explorer*
+		You can set the global variable "html_internet_explorer" to
+		the full path to the internet explorer executable in the
+		unlikely event that it's not in the default place
+		(C:\Program Files\Internet Explorer\iexplore).
+
+ vim:tw=78:

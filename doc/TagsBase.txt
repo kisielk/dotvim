@@ -1,0 +1,291 @@
+
+*TagsBase.txt*          Plugin for tag related advanced features
+
+
+1.      Description                             |TagsBase-Description|
+2.      Requirements                            |TagsBase-requirements|
+3.      Customization                           |TagsBase-Options| |TagsBase-Customization|
+4.      Parsing                                 |TagsBase-Parsing|
+5.      Functions                               |TagsBase-Functions|
+        5.1. TagsBase_GetTagName({line})        |TagsBase_GetTagName()|
+        5.2. TagsBase_GetTagType({line})        |TagsBase_GetTagType()|
+        5.3. TagsBase_GoToTag({TagName}, {index}) |TagsBase_GoToTag()|
+6.      Special Buffer                          |TagsBase-Buffer| |TagsBase-Window| |:TagsWindow|
+7.      Known bugs                              |TagsBase-Bugs|
+8.      ChangeLog                               |TagsBase-ChangeLog|
+9.      Todo                                    |TagsBase-Todo|
+10.      Credits                                 |TagsBase-Credits|
+
+
+*TagsBase-Description*
+1. Description
+Tags Base is the result of the merge and enhancements of the scripts:
+ *TagsMenu (http://members.home.net/jayglanville/tagsmenu/TagsMenu.html) script
+            Jay Dickon Glanville  dickon@nortelnetworks.com
+
+ *ctags.vim (http://vim.sourceforge.net/scripts/script.php?script_id=12) script
+            Alexey Marinichev   lyosha@lyosha.2y.net
+ see |TagsBase-Credits|
+
+Tags Base automatically uses |ctags| to generate a |tag| file for the currently
+edited file, refreshes it if the file is newer than the tags file and uses it
+to provide a set of advanced feature to vim.
+
+Beware that this means that some tag files are left behind on your computer,
+    they may end up in the same directory as your files or in a temporary
+    directory depending on the rights.  I'll try to soon offer you an options
+    to have them cleaned up when vim exits.  Right now you can specify the
+    prefixe and suffix used to compute them.
+
+Right now the feature provided are:
+    *Detection of the currently edited function (or more precisely of the last
+     tag above the current line) and presentation of this function in the
+     title bar.
+    *Creation of a menu of tags in the file this contains things such as method,
+    function, class... the type of tags supported depends on the current
+    language and on the implementation of the |ctags| program
+
+    TagsBase manipulates all tags supported by |ctags|. (For the full list of
+    supported tags and attributes, see "http://ctags.sourceforge.net/"
+
+
+===============================================================================
+*TagsBase-requirements*
+2. Requirements
+    TagsBase for GVim has only two requirements: gvim 6.x (with standard vim you
+    won't have any menus), and Exuberant Ctags 5.0 or later
+    (http://ctags.sourceforge.net/).
+    Ctags is not distributed with vim anymore but its a great tool for any
+    programmer using vim.
+
+Note 1: if you do not have version 5.0 of ctags, I recommend that you upgrade,
+        it may work (with some fiddling with the |TagsBase-Parsing|
+        options) but it is not tested.
+
+Note 2: the requirement is for Exuberant ctags. This satisfies the requirements
+        of the level two information on line number and tags type.
+        Other ctags program may provide it but you'll need to tweak the
+        parsing regexps see |TagsBase-Parsing|
+
+===============================================================================
+*TagsBase-Options*                  *TagsBase-Customization*
+3. Customization
+
+There are several global variables that users can use to change the scripts
+behaviour. In order to set a variable, simply use |:let| in a sourced script
+or in the command line.
++-----------------------+-----------------------+------------------------------+
+| variable:             |default value:         |description:                  |
++-----------------------+-----------------------+------------------------------+
+|g:TagsBase_groupByType |1 (true)               |group tags in the menu        |
+|g:TagsBase_CatProg     |cat or type            |program to read a file        |
+|g:TagsBase_rmProg      |rm or del              |program to delete a file      |
+|g:TagsBase_ACMode      |2                      |Autocommand settings 0=None   |
+|                       |                       |1=TagsMenu 2=Both 3=Title     |
+|g:TagsBase_prefix      |.tb.                   |prefix for the tags files     |
+|g:TagsBase_sufix       |.tags                  |suffix for the tags files     |
+|g:TagsBase_CleanUp     |1                      |0=none 1=file in tmp 2=all    |
+|g:TagsBase_TitlePrefix |%t%( %M%)%( (%{expand("%:~:.:h")})%)%( %a%)%=         |
+|                       |                       | 'titlestring' prefix         |
+|g:TagsBase_MaxMenuSize |20                     | max number of items/menu     |
+|                       |                       |                              |
+|g:TagsBase_ctagsCommand|ctags --fields=Kn -o   |used to launch ctags          |
+|g:TagsBase_Pattern     |^\([^\t]\{-}\)\t[^\t]\{-}\t\(.\{-}\);"\t\([^\t]*\)\tline:\(\d*\).*$
+|                       |                       |used to parse a tag           |
+|g:TagsBase_namePar     |\1                     |used to parse a tag name      |
+|g:TagsBase_exprPar     |\2                     |used to parse a tag expr      |
+|g:TagsBase_typePar     |\3                     |used to parse a tag type      |
+|g:TagsBase_linePar     |\4                     |used to parse a tag line      |
++-----------------------+-----------------------+------------------------------+
+call s:TagsBaseSet('g:TagsBase_prefix','.tb.')
+" Sufixes for the tags files
+call s:TagsBaseSet('g:TagsBase_sufix','.tags')
+
+
+*TagsBase-Parsing*
+4. Parsing
+Parsing in TagsBase is done using a regexp and some substitution strings they
+are in global variable so they can be customized, right now the regexp parses a
+tag with the format:
++------------+------------------+------------------------------+-----------------+
+|org.jruby   |   Main.java      |/^package org.jruby;$/;"      | package line:28 |
+|    ^       |       ^          |        ^      |       ^      |     ^        ^  |
+|tagname     |   file (skipped) |expression     |level 2 delim |   type    line  |
++------------+------------------+---------------+--------------+-----------------+
+in this table the vertical lines going through the tag line denote a <tab>.
+the variables:
+g:TagsBase_ctagsCommand
+g:TagsBase_Pattern
+g:TagsBase_namePar
+g:TagsBase_exprPar
+g:TagsBase_typePar
+g:TagsBase_linePar
+are used in conjunction to produce and parse tags of this format.
+
+
+===============================================================================
+*TagsBase-Functions*
+5. Functions
+
+5.1     TagsBase_GetTagName({line})                         *TagsBase_GetTagName()*
+the result is the name of the last tag define above {line}.
+{line} is either a line number (which must be matched by the '\d\+' regexp,
+        i.e.: a decimal number) or a parameter for the |line()| function.
+
+This function is to be used if you want to display the tag name someplace else
+than the title bar (in the status bar for example or in a dialog when you hit
+a certain key)
+
+
+5.2     TagsBase_GetTagType({line})                         *TagsBase_GetTagType()*
+the result is the type of the last tag define above {line}.
+{line} is either a line number (which must be matched by the '\d\+' regexp,
+        i.e.: a decimal number) or a parameter for the |line()| function.
+
+This function is to be used if you want to display the tag type someplace else
+than the title bar (in the status bar for example or in a dialog when you hit
+a certain key)
+
+5.3     TagsBase_GoToTag({TagName}, {index})                *TagsBase_GoToTag()*
+uses vim tags facility to jump to a tag and push the tag to the tag stack.
+Jumps to a tag in the tagsbase, TagName is the name of the tag index is the
+number of repeat search to do (if you want the first tag with this name use 0)
+
+
+
+
+===============================================================================
+*TagsBase-Buffer* *TagsBase-Window* *:TagsWindow*
+6. Special Buffer/Window
+By using the TagsWindow command one can open a buffer with the list of all
+tags in the current buffer.
+This buffer can then be used to jump to any of those tag by doubleclicking or by
+hitting enter on the appropriate line .
++--------------+-----------+
+| <cr>         | Goto Tag  |
++--------------+-----------+
+|<2-LeftMouse> | Goto Tag  |
++--------------+-----------+
+===============================================================================
+*TagsBase-Bugs*
+7. Known bugs
+
+
+
+*TagsBase-ChangeLog*
+8. ChangeLog
+[28-Nov-2001] 0.9.2 (vim 6.0) "corrected several bugs when the file path
+                               contains some spaces
+                               corrected a bug with the TagsWindow"
+[12-Nov-2001] 0.9.1 (vim 6.0) "corrected a bug in the current tag lookup when
+                                perl is not available"
+[11-Nov-2001] 0.9   (vim 6.0) "added the TagsWindow command to visualize tags
+                               in a buffer.
+                               added a menu entry to opent the Tags Buffer.
+                               added a toc to the help.
+                               corrected the NT ACL bug.
+                               "
+              0.8.4 (vim 6.0) "correct order of submenus.  Correct opening
+                                of submenu on several levels."
+[25-Oct-2001] 0.8.3 (vim 6.0) "enhanced cascading menus for win32. Do not
+                                use the popup anymore but really opens the
+                                menu"
+[21-Oct-2001] 0.8.2 (vim 6.0) "bugfix removed some stray timing statements
+                                from the perl scripts"
+[20-Oct-2001] 0.8.1 (vim 6.0) "small correction for bug resulting in error
+                                        message:
+                                 Uncaught exception from user code:
+                                ^ICan't call method "Type" on unblessed
+                                        reference at perl/TagsBase.vim line 376.
+                                ^ITagsBase::GetTagType(391) called at
+                                        (eval 14) line 1
+                                ^Ieval 'TagsBase::GetTagType 391
+                                ;' called at (eval 14) line 0
+                                Uncaught exception from user code:
+                                ^ICan't call method "Name" on unblessed
+                                        reference at perl/TagsBase.vim line 389.
+                                ^ITagsBase::GetTagName(391) called at
+                                        (eval 15) line 1
+                                ^Ieval 'TagsBase::GetTagName 391
+                                "
+
+[17-Oct-2001] 0.8  (vim 6.0)  "Greatly improved the speed when perl is
+                                available.  Now almost everything happens in
+                                the perl interpreter.
+                                Speed improvement example: on a file with 5408
+                                tags: 645 second --> 72 second.
+                                Limited the number of menu items to
+                                configurable size both for time reasons and
+                                because gtk doesn't like menus which are
+                                longer than the screen"
+
+[07-Oct-2001] 0.7.1 (vim 6.0)  "Corrected some bugs regarding the situation
+                                When perl is not builtin.
+                                Corrected a bug when there is only one tag in
+                                the file repeated tag generation would
+                                interpret it as being overloaded.
+[07-Oct-2001] 0.7 (vim 6.0)    "Corrected some bugs regarding paths with spaces.
+                                replaced the script local function s:GetTagName
+                                by a global function TagsBase_GetTagName.
+                                Modified the doc to suggest using this function
+                                for displaying the tag name someplace else than
+                                the title bar.
+
+[06-Oct-2001] 0.6.1 (vim 6.0)  "Uses the BufEnter autocmd to refresh the menu,
+                                this makes the menu work with split windows.
+                                Keeps the menu generating command in a buffer
+                                variable to avoid the extra work of reparsing if
+                                it is not needed.  Uses the perl interpreter if
+                                available to speed up the tags parsing"
+[02-Oct-2001] 0.6 (vim 6.0)    "avoids opening a buffer on the tags file,
+                                optionnally destroy the created tags files,
+                                changed the name of the g:CatProg variable to
+                                g:TagsBase_CatProg."
+[02-Oct-2001] 0.5.3 (vim 6.0)  "added new options to select the name of the tags
+                                files. Removed the html files. Changed the
+                                license to public domain added the
+                                |TagsBase-ChangeLog| and the |TagsBase-Credits|
+                                section to the help. Added a warning about the
+                                existence of the tags files"
+[02-Oct-2001] 0.5.2 (vim 6.0)  "bug fixes in the sorting of the lines array"
+[02-Oct-2001] 0.5.1 (vim 6.0)  "bug correction
+[02-Oct-2001] 0.5 (vim 6.0)    "Added help, made customization easier, packaged
+                                into a zip file.
+                                To install unpack in a directory in your
+                                runtimepath (see :help runtimepath) and run
+                                :helptags $dirUnpacked/doc
+                                "
+[02-Oct-2001] 0.4 (vim 6.0)     "reorganized and commented the script, support
+                                for the builtin tags stack, support for
+                                ordered tag file generation, some bugs
+                                corrected."
+[01-Oct-2001] 0.3 (vim 6.0)     "added a menu entry to toggle on and off the
+                                title string functionality"
+[01-Oct-2001] 0.2 (vim 6.0)     "Corrected dependency on a $TMP variable
+                                corrected bug when on an M$ system the shell
+                                used was a unix type shell, this generated
+                                problems due to the shell misinterpreting the
+                                '' in a path.
+
+If you find any other bugs, please report it by mail to me (benoit.cerrina@writeme.com"
+
+*TagsBase-Todo*
+9. TODO:
+*add make the TagsWindow more usable
+*add cascading menu for win32 no perl
+*add check for non win32 in code to make it still work or
+     at least put out a message and skip the computation
+     when the menu is too big
+*add check to remove the error message due to no cascading
+     menu support outside of win32
+
+
+*TagsBase-Credits*
+10. Credits
+credits should go to:
+Jay Dickon Glanville  dickon@nortelnetworks.com
+Alexey Marinichev   lyosha@lyosha.2y.net
+who made the scripts which were the basis for this one and to
+Bram Molenaar Bram@vim.org for vim as a whole
+
+ vim:tw=78:ts=8:ft=help:norl:et:
