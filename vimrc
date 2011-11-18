@@ -77,6 +77,7 @@ set wildmenu "Turn on the 'wildmenu', extended menu for tab completion
 set wildmode=longest:full
 set wildignore+=*.pyc,*.pyo,*.swp,*.bak,*.o
 set wildignore+=*/.git/*,*/.hg/*,*/.svn/*
+set wildignore+=*/build/*
 if has("gui_running")
   colorscheme xoria256
 else
@@ -86,6 +87,11 @@ endif
 
 set list
 set listchars=tab:>.,trail:.,extends:#,nbsp:. " How to format invisible chars
+"}}}
+
+" Additional Commands "{{{
+" Diff the current buffer with the original file
+command! DiffOrig vert new | set bt=nofile | r # | 0d_ | diffthis | wincmd p | diffthis
 "}}}
 
 " Keybindings "{{{
@@ -102,6 +108,7 @@ nmap <leader>tw :%s/\s\+$//<cr>
 map <leader>sd :new<cr>:read !svn diff<cr>:set syntax=diff buftype=nofile<CR>gg
 map <leader>hd :new<cr>:read !hg diff<cr>:set ft=diff buftype=nofile<CR>gg
 map <leader>hqd :new<cr>:read !hg qdiff<cr>:set ft=diff buftype=nofile<CR>gg
+map <leader>do :DiffOrig
 
 map <leader>pl !pylint
 nmap <leader>c <plug>NERDCommenterToggle
@@ -116,15 +123,18 @@ map <leader>vr :e $HOME/.vimrc<cr>
 set printoptions="syntax:n,paper:letter"
 "}}}
 
-" Other "{{{
+" Autocommands "{{{
 
 " When editing a file, always jump to the last known cursor position.
 " Don't do it when the position is invalid or when inside an event handler
 " (happens when dropping a file on gvim).
-autocmd BufReadPost *
+autocmd! BufReadPost *
       \ if line("'\"") > 0 && line("'\"") <= line("$") |
       \   exe "normal g`\"" |
       \ endif
+
+" Reload vimrc after editing
+au! BufWritePost $MYVIMRC source $MYVIMRC
 ""}}}
 
 " Folding "{{{
@@ -159,6 +169,5 @@ if $HOSTNAME == "fraser"
   fixdel
 endif
 "}}}
-
 
 " vim: foldmethod=marker:ts=2:expandtab:sw=2
