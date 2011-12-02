@@ -97,12 +97,12 @@ command! DiffOrig vert new | set bt=nofile | r # | 0d_ | diffthis | wincmd p | d
 " Keybindings "{{{
 set pastetoggle=<F10>
 let mapleader=","
-map <leader>nt :NERDTreeToggle<cr>
 map <leader>nh :nohl<cr>
 nmap <leader><c-t>n :tabnew<cr>
 nmap <leader>tp :tabp<cr>
 nmap <leader>tn :tabn<cr>
 nmap <leader>tw :%s/\s\+$//<cr>
+map <leader>vr :e $HOME/.vimrc<cr>
 
 """ Diffs
 map <leader>sd :new<cr>:read !svn diff<cr>:set syntax=diff buftype=nofile<CR>gg
@@ -110,13 +110,14 @@ map <leader>hd :new<cr>:read !hg diff<cr>:set ft=diff buftype=nofile<CR>gg
 map <leader>hqd :new<cr>:read !hg qdiff<cr>:set ft=diff buftype=nofile<CR>gg
 map <leader>do :DiffOrig
 
+""" Plugins
 map <leader>pl !pylint
 nmap <leader>c <plug>NERDCommenterToggle
 vmap <leader>c <plug>NERDCommenterToggle
+map <leader>nt :NERDTreeToggle<cr>
+nnoremap <leader>ud :GundoToggle<cr>
+map <leader>td <plug>TaskList
 
-nnoremap <leader>ut :GundoToggle<cr>
-
-map <leader>vr :e $HOME/.vimrc<cr>
 "}}}
 
 " Printing "{{{
