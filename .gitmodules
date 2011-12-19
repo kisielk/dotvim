@@ -25,3 +25,6 @@
 [submodule "bundle/tasklist"]
 	path = bundle/tasklist
 	url = https://github.com/vim-scripts/TaskList.vim.git
+[submodule "bundle/vimerl"]
+	path = bundle/vimerl
+	url = https://github.com/jimenezrick/vimerl
