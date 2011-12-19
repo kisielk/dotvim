@@ -63,7 +63,7 @@ set splitbelow
 set splitright
 set laststatus=2 "Always show status line in the last window
 set ruler "Show cursor position
-set statusline=%f\ b%n%(\ [%M%R%W]%)\ %Y\ %=\ %-14B\ %-24(%l/%L,%c%V%)\ %p%%
+set statusline=%f\ b%n%(\ [%M%R%W]%)\ %Y\ %{fugitive#statusline()}\ %=\ %-14B\ %-24(%l/%L,%c%V%)\ %p%%
 
 set history=1000 "Command history size
 set undolevels=1000 "Many undos
