@@ -1,5 +1,5 @@
-set kp=ri
-set ts=2
-set sts=2
-set sw=2
-set expandtab
+setlocal kp=ri
+setlocal ts=2
+setlocal sts=2
+setlocal sw=2
+setlocal expandtab

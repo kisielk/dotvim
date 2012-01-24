@@ -1,3 +1,3 @@
-set expandtab
-set ts=4
-set sw=4
+setlocal expandtab
+setlocal ts=4
+setlocal sw=4

@@ -1,4 +1,4 @@
-set wrap
-set tw=80
-set colorcolumn=80,100
+setlocal wrap
+setlocal tw=80
+setlocal colorcolumn=80,100
 hi ColorColumn guibg=gray14
