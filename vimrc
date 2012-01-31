@@ -87,6 +87,17 @@ endif
 
 set list
 set listchars=tab:>.,trail:.,extends:#,nbsp:. " How to format invisible chars
+
+" Function for toggling relative line numbering
+function! NumberToggle()
+  if(&relativenumber == 1)
+    set number
+  else
+    set relativenumber
+  endif
+endfunc
+
+
 "}}}
 
 " Additional Commands "{{{
@@ -103,6 +114,7 @@ nmap <leader>tp :tabp<cr>
 nmap <leader>tn :tabn<cr>
 nmap <leader>tw :%s/\s\+$//<cr>
 map <leader>vr :e $HOME/.vimrc<cr>
+nnoremap <leader>nn :call NumberToggle()<cr>
 
 """ Diffs
 map <leader>sd :new<cr>:read !svn diff<cr>:set syntax=diff buftype=nofile<CR>gg
