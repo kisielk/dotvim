@@ -167,6 +167,9 @@ let NERDTreeShowBookmarks = 1
 let NERDTreeIgnore=['\.pyc$', '\~$']
 let g:ctrlp_working_path_mode = 2
 let g:ctrlp_by_filename = 0
+let g:syntastic_python_checker = 'pyflakes'
+let g:syntastic_check_on_open = 1
+let g:syntastic_auto_loc_list = 1
 "}}}
 
 " OS-Specific "{{{
