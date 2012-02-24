@@ -197,11 +197,4 @@ if has("win32")
 endif
 "}}}
 
-" Machine-Specific "{{{
-if $HOSTNAME == "fraser"
-  set t_kb
-  fixdel
-endif
-"}}}
-
 " vim: foldmethod=marker:ts=2:expandtab:sw=2
