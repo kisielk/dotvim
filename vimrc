@@ -1,7 +1,25 @@
 " Basic Vim settings "{{{
 set nocompatible
 filetype off " Reset if set by a system-wide config
-call pathogen#infect() " Enable pathogen
+
+set rtp+=~/.vim/bundle/vundle/
+call vundle#rc()
+
+" Bundles "{{{
+Bundle 'gmarik/vundle'
+Bundle 'jimenezrick/vimerl'
+Bundle 'kien/ctrlp.vim'
+Bundle 'nathanaelkane/vim-indent-guides'
+Bundle 'scrooloose/nerdcommenter'
+Bundle 'scrooloose/nerdtree'
+Bundle 'scrooloose/syntastic'
+Bundle 'sjl/gundo.vim'
+Bundle 'tpope/vim-fugitive'
+Bundle 'vim-scripts/TaskList.vim'
+Bundle 'vim-scripts/argtextobj.vim'
+"}}}
+
+
 filetype plugin indent on " Enable filetype specific things
 "}}}
 
