@@ -17,6 +17,7 @@ Bundle 'sjl/gundo.vim'
 Bundle 'tpope/vim-fugitive'
 Bundle 'vim-scripts/TaskList.vim'
 Bundle 'vim-scripts/argtextobj.vim'
+Bundle 'vim-scripts/VimClojure'
 "}}}
 
 
@@ -126,6 +127,7 @@ command! DiffOrig vert new | set bt=nofile | r # | 0d_ | diffthis | wincmd p | d
 " Keybindings "{{{
 set pastetoggle=<F10>
 let mapleader=","
+let maplocalleader=","
 map <leader>nh :nohl<cr>
 nmap <leader><c-t>n :tabnew<cr>
 nmap <leader>tp :tabp<cr>
@@ -141,7 +143,6 @@ map <leader>hqd :new<cr>:read !hg qdiff<cr>:set ft=diff buftype=nofile<CR>gg
 map <leader>do :DiffOrig
 
 """ Plugins
-map <leader>pl !pylint
 nmap <leader>c <plug>NERDCommenterToggle
 vmap <leader>c <plug>NERDCommenterToggle
 map <leader>nt :NERDTreeToggle<cr>
@@ -188,6 +189,8 @@ let g:ctrlp_by_filename = 0
 let g:syntastic_python_checker = 'pyflakes'
 let g:syntastic_check_on_open = 1
 let g:syntastic_auto_loc_list = 1
+let g:vimclojure#WantNailgun = 1
+let grvimclojure#ParenRainbow = 1
 "}}}
 
 " OS-Specific "{{{
