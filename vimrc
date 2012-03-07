@@ -184,6 +184,7 @@ let python_highlight_all = 1
 let NERDCreateDefaultMappings = 0
 let NERDTreeShowBookmarks = 1
 let NERDTreeIgnore=['\.pyc$', '\~$']
+let NERDSpaceDelims = 1
 let g:ctrlp_working_path_mode = 2
 let g:ctrlp_by_filename = 0
 let g:syntastic_python_checker = 'pyflakes'
