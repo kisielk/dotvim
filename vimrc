@@ -5,6 +5,11 @@ filetype off " Reset if set by a system-wide config
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 
+" Enable go plugins
+if exists("$GOROOT")
+  set rtp+=$GOROOT/misc/vim/
+endif
+
 " Bundles "{{{
 Bundle 'gmarik/vundle'
 Bundle 'jimenezrick/vimerl'
