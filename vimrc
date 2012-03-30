@@ -14,6 +14,7 @@ endif
 Bundle 'gmarik/vundle'
 Bundle 'jimenezrick/vimerl'
 Bundle 'kien/ctrlp.vim'
+Bundle 'Lokaltog/vim-powerline'
 Bundle 'nathanaelkane/vim-indent-guides'
 Bundle 'scrooloose/nerdcommenter'
 Bundle 'scrooloose/nerdtree'
