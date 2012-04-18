@@ -111,7 +111,7 @@ else
 endif
 
 set list
-set listchars=tab:>.,trail:.,extends:#,nbsp:. " How to format invisible chars
+set listchars=tab:»·,trail:.,extends:#,nbsp:. " How to format invisible chars
 
 " Function for toggling relative line numbering
 function! NumberToggle()
@@ -207,5 +207,17 @@ if has("win32")
   command Ew browse w
 endif
 "}}}
+
+" Additional commands "{{{
+function! Rex(cmd)
+  redir => message
+  silent execute a:cmd
+  redir END
+  tabnew
+  silent put=message
+  set nomodified
+endfunction
+command! -nargs=+ -complete=command Rex call Rex(<q-args>)
+
 
 " vim: foldmethod=marker:ts=2:expandtab:sw=2
