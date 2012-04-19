@@ -103,15 +103,16 @@ set wildmode=longest:full
 set wildignore+=*.pyc,*.pyo,*.swp,*.bak,*.o
 set wildignore+=*/.git/*,*/.hg/*,*/.svn/*
 set wildignore+=*/build/*
+set list
 if has("gui_running")
   colorscheme xoria256
+  set listchars=tab:»·,trail:.,extends:#,nbsp:.
 else
   set bg=dark
   colorscheme enzyme
+  set listchars=tab:>.,trail:.,extends:#,nbsp:.
 endif
 
-set list
-set listchars=tab:»·,trail:.,extends:#,nbsp:. " How to format invisible chars
 
 " Function for toggling relative line numbering
 function! NumberToggle()
