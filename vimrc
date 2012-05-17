@@ -11,6 +11,7 @@ if exists("$GOROOT")
 endif
 
 " Bundles "{{{
+Bundle 'altercation/vim-colors-solarized'
 Bundle 'gmarik/vundle'
 Bundle 'jimenezrick/vimerl'
 Bundle 'kien/ctrlp.vim'
@@ -95,7 +96,7 @@ set undolevels=1000 "Many undos
 
 set vb "Visual bell instead of beep
 set scrolloff=5 "Lines of context when scrolling
-set shortmess="a" "Shorten common messages
+set shortmess="aI" "Shorten common messages
 set sbr=">" "Line wrapping indicator
 set sft "Show full tag for completion
 set wildmenu "Turn on the 'wildmenu', extended menu for tab completion
@@ -104,12 +105,13 @@ set wildignore+=*.pyc,*.pyo,*.swp,*.bak,*.o
 set wildignore+=*/.git/*,*/.hg/*,*/.svn/*
 set wildignore+=*/build/*
 set list
+
+colorscheme solarized
 if has("gui_running")
-  colorscheme xoria256
+  set bg=light
   set listchars=tab:»·,trail:.,extends:#,nbsp:.
 else
   set bg=dark
-  colorscheme enzyme
   set listchars=tab:>.,trail:.,extends:#,nbsp:.
 endif
 
@@ -154,6 +156,7 @@ nmap <leader>c <plug>NERDCommenterToggle
 vmap <leader>c <plug>NERDCommenterToggle
 map <leader>nt :NERDTreeToggle<cr>
 nnoremap <leader>ud :GundoToggle<cr>
+map <leader>st :SyntasticToggleMode<cr>
 map <leader>td <plug>TaskList
 
 "}}}

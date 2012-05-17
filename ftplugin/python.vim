@@ -8,5 +8,4 @@ setlocal foldmethod=indent
 
 if has('gui_running')
     setlocal colorcolumn=80,100
-    hi ColorColumn guibg=gray14
 endif
