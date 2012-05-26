@@ -113,6 +113,9 @@ if has("gui_running")
 else
   set bg=dark
   set listchars=tab:>.,trail:.,extends:#,nbsp:.
+  if $COLORTERM == "gnome-terminal"
+    set t_Co=16
+  endif
 endif
 
 
