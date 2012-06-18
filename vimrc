@@ -194,16 +194,23 @@ iabbr dopdb import pdb;pdb.set_trace()
 
 " Plugin settings "{{{
 let python_highlight_all = 1
+
 let NERDCreateDefaultMappings = 0
 let NERDTreeShowBookmarks = 1
 let NERDTreeIgnore=['\.pyc$', '\~$']
+let NERDTreeMinimalUI = 1
+let NERDTreeChDirMode = 2
 let NERDSpaceDelims = 1
+
 let g:ctrlp_working_path_mode = 2
 let g:ctrlp_by_filename = 0
+
 let g:gundo_preview_bottom = 1
+
 let g:syntastic_python_checker = 'pyflakes'
 let g:syntastic_check_on_open = 1
 let g:syntastic_auto_loc_list = 1
+
 let g:vimclojure#WantNailgun = 1
 let grvimclojure#ParenRainbow = 1
 "}}}
