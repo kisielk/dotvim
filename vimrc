@@ -148,6 +148,10 @@ nmap <leader>tw :%s/\s\+$//<cr>
 map <leader>vr :e $HOME/.vimrc<cr>
 nnoremap <leader>nn :call NumberToggle()<cr>
 
+" Font resizing
+nnoremap <C-Up> :silent! let &guifont = substitute( &guifont, ':h\zs\d\+', '\=eval(submatch(0)+1)', '')<CR>
+nnoremap <C-Down> :silent! let &guifont = substitute(&guifont, ':h\zs\d\+', '\=eval(submatch(0)-1)', '')<CR>
+
 """ Diffs
 map <leader>sd :new<cr>:read !svn diff<cr>:set syntax=diff buftype=nofile<CR>gg
 map <leader>hd :new<cr>:read !hg diff<cr>:set ft=diff buftype=nofile<CR>gg
@@ -233,5 +237,6 @@ function! Rex(cmd)
 endfunction
 command! -nargs=+ -complete=command Rex call Rex(<q-args>)
 
+command Columns %! column -t
 
 " vim: foldmethod=marker:ts=2:expandtab:sw=2
