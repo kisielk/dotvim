@@ -11,11 +11,11 @@ if exists("$GOROOT")
 endif
 
 " Bundles "{{{
+Bundle 'Lokaltog/vim-powerline'
 Bundle 'altercation/vim-colors-solarized'
 Bundle 'gmarik/vundle'
 Bundle 'jimenezrick/vimerl'
 Bundle 'kien/ctrlp.vim'
-Bundle 'Lokaltog/vim-powerline'
 Bundle 'nathanaelkane/vim-indent-guides'
 Bundle 'scrooloose/nerdcommenter'
 Bundle 'scrooloose/nerdtree'
@@ -23,8 +23,9 @@ Bundle 'scrooloose/syntastic'
 Bundle 'sjl/gundo.vim'
 Bundle 'tpope/vim-fugitive'
 Bundle 'vim-scripts/TaskList.vim'
-Bundle 'vim-scripts/argtextobj.vim'
 Bundle 'vim-scripts/VimClojure'
+Bundle 'vim-scripts/argtextobj.vim'
+Bundle 'vim-scripts/taglist.vim'
 "}}}
 
 
@@ -67,7 +68,8 @@ if has("gui_running")
   elseif has("x11")
     set guifont=DejaVu\ Sans\ Mono\ 10
   elseif has("gui_macvim")
-    set guifont=Envy\ Code\ R:h13
+    set guifont=Source\ Code\ Pro:h12
+    " set guifont=Envy\ Code\ R:h13
     set fuopt=maxvert,maxhorz
   endif
   set mousehide " Hide the mouse when typing
@@ -214,6 +216,9 @@ let g:gundo_preview_bottom = 1
 let g:syntastic_python_checker = 'pyflakes'
 let g:syntastic_check_on_open = 1
 let g:syntastic_auto_loc_list = 1
+let g:syntastic_mode_map = { 'mode': 'active',
+\ 'active_filetypes': [],
+\ 'passive_filetypes': ['html'] }
 
 let g:vimclojure#WantNailgun = 1
 let grvimclojure#ParenRainbow = 1
@@ -237,6 +242,6 @@ function! Rex(cmd)
 endfunction
 command! -nargs=+ -complete=command Rex call Rex(<q-args>)
 
-command Columns %! column -t
+command! Columns %! column -t
 
 " vim: foldmethod=marker:ts=2:expandtab:sw=2
