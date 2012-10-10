@@ -12,6 +12,7 @@ endif
 
 " Bundles "{{{
 Bundle 'Lokaltog/vim-powerline'
+Bundle 'Lokaltog/vim-easymotion'
 Bundle 'altercation/vim-colors-solarized'
 Bundle 'gmarik/vundle'
 Bundle 'jimenezrick/vimerl'
