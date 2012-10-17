@@ -28,6 +28,7 @@ Bundle 'vim-scripts/TaskList.vim'
 Bundle 'vim-scripts/VimClojure'
 Bundle 'vim-scripts/argtextobj.vim'
 Bundle 'vim-scripts/taglist.vim'
+Bundle "pangloss/vim-javascript"
 "}}}
 
 
