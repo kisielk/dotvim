@@ -108,7 +108,7 @@ set wildmenu "Turn on the 'wildmenu', extended menu for tab completion
 set wildmode=longest:full
 set wildignore+=*.pyc,*.pyo,*.swp,*.bak,*.o
 set wildignore+=*/.git/*,*/.hg/*,*/.svn/*
-set wildignore+=*/build/*
+set wildignore+=*/build/*,*/dist/*
 set list
 
 colorscheme solarized
@@ -216,7 +216,7 @@ let g:ctrlp_by_filename = 0
 
 let g:gundo_preview_bottom = 1
 
-let g:syntastic_python_checker = 'pyflakes'
+let g:syntastic_python_checker_args = '--ignore=E501'
 let g:syntastic_check_on_open = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_mode_map = { 'mode': 'active',
