@@ -11,12 +11,14 @@ if exists("$GOROOT")
 endif
 
 " Bundles "{{{
-Bundle 'Lokaltog/vim-powerline'
+Bundle "pangloss/vim-javascript"
 Bundle 'Lokaltog/vim-easymotion'
+Bundle 'Lokaltog/vim-powerline'
 Bundle 'altercation/vim-colors-solarized'
 Bundle 'gmarik/vundle'
 Bundle 'jimenezrick/vimerl'
 Bundle 'kien/ctrlp.vim'
+Bundle 'mileszs/ack.vim'
 Bundle 'nathanaelkane/vim-indent-guides'
 Bundle 'nsf/gocode', {'rtp': 'vim/'}
 Bundle 'scrooloose/nerdcommenter'
@@ -28,7 +30,6 @@ Bundle 'vim-scripts/TaskList.vim'
 Bundle 'vim-scripts/VimClojure'
 Bundle 'vim-scripts/argtextobj.vim'
 Bundle 'vim-scripts/taglist.vim'
-Bundle "pangloss/vim-javascript"
 "}}}
 
 
