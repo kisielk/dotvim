@@ -11,6 +11,7 @@ if exists("$GOROOT")
 endif
 
 " Bundles "{{{
+Bundle "hynek/vim-python-pep8-indent"
 Bundle "pangloss/vim-javascript"
 Bundle 'Lokaltog/vim-easymotion'
 Bundle 'Lokaltog/vim-powerline'
@@ -137,10 +138,6 @@ endfunc
 
 "}}}
 
-" Additional Commands "{{{
-" Diff the current buffer with the original file
-command! DiffOrig vert new | set bt=nofile | r # | 0d_ | diffthis | wincmd p | diffthis
-"}}}
 
 " Keybindings "{{{
 set pastetoggle=<F10>
@@ -226,6 +223,8 @@ let g:syntastic_mode_map = { 'mode': 'active',
 
 let g:vimclojure#WantNailgun = 1
 let grvimclojure#ParenRainbow = 1
+
+let g:ackprg = 'ag --nogroup --nocolor --column'
 "}}}
 
 " OS-Specific "{{{
@@ -247,5 +246,7 @@ endfunction
 command! -nargs=+ -complete=command Rex call Rex(<q-args>)
 
 command! Columns %! column -t
+command! -nargs=+ Ag Ack <args>
+"}}}
 
 " vim: foldmethod=marker:ts=2:expandtab:sw=2
