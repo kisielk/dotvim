@@ -143,12 +143,13 @@ endfunc
 set pastetoggle=<F10>
 let mapleader=","
 let maplocalleader=","
-map <leader>nh :nohl<cr>
-nmap <leader><c-t>n :tabnew<cr>
-nmap <leader>tp :tabp<cr>
-nmap <leader>tn :tabn<cr>
-nmap <leader>tw :%s/\s\+$//<cr>
-map <leader>vr :e $HOME/.vimrc<cr>
+
+noremap <leader>nh :nohl<cr>
+nnoremap <leader><c-t>n :tabnew<cr>
+nnoremap <leader>tp :tabp<cr>
+nnoremap <leader>tn :tabn<cr>
+nnoremap <leader>tw :%s/\s\+$//<cr>
+noremap <leader>vr :e $HOME/.vimrc<cr>
 nnoremap <leader>nn :call NumberToggle()<cr>
 
 " Font resizing
@@ -156,18 +157,18 @@ nnoremap <C-Up> :silent! let &guifont = substitute( &guifont, ':h\zs\d\+', '\=ev
 nnoremap <C-Down> :silent! let &guifont = substitute(&guifont, ':h\zs\d\+', '\=eval(submatch(0)-1)', '')<CR>
 
 """ Diffs
-map <leader>sd :new<cr>:read !svn diff<cr>:set syntax=diff buftype=nofile<CR>gg
-map <leader>hd :new<cr>:read !hg diff<cr>:set ft=diff buftype=nofile<CR>gg
-map <leader>hqd :new<cr>:read !hg qdiff<cr>:set ft=diff buftype=nofile<CR>gg
-map <leader>do :DiffOrig
+noremap <leader>sd :new<cr>:read !svn diff<cr>:set syntax=diff buftype=nofile<CR>gg
+noremap <leader>hd :new<cr>:read !hg diff<cr>:set ft=diff buftype=nofile<CR>gg
+noremap <leader>hqd :new<cr>:read !hg qdiff<cr>:set ft=diff buftype=nofile<CR>gg
+noremap <leader>do :DiffOrig
 
 """ Plugins
-nmap <leader>c <plug>NERDCommenterToggle
-vmap <leader>c <plug>NERDCommenterToggle
-map <leader>nt :NERDTreeToggle<cr>
+nnoremap <leader>c <plug>NERDCommenterToggle
+vnoremap <leader>c <plug>NERDCommenterToggle
+noremap <leader>nt :NERDTreeToggle<cr>
 nnoremap <leader>ud :GundoToggle<cr>
-map <leader>st :SyntasticToggleMode<cr>
-map <leader>td <plug>TaskList
+noremap <leader>st :SyntasticToggleMode<cr>
+noremap <leader>td <plug>TaskList
 
 "}}}
 
