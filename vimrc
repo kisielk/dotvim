@@ -138,7 +138,6 @@ endfunc
 
 "}}}
 
-
 " Keybindings "{{{
 set pastetoggle=<F10>
 let mapleader=","
@@ -149,7 +148,7 @@ nnoremap <leader><c-t>n :tabnew<cr>
 nnoremap <leader>tp :tabp<cr>
 nnoremap <leader>tn :tabn<cr>
 nnoremap <leader>tw :%s/\s\+$//<cr>
-noremap <leader>vr :e $HOME/.vimrc<cr>
+noremap <leader>vr :vsplit $MYVIMRC<cr>
 nnoremap <leader>nn :call NumberToggle()<cr>
 
 " Font resizing
