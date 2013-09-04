@@ -1,3 +1,5 @@
 setlocal wrap
 setlocal tw=80
-setlocal colorcolumn=80,100
+if exists('+colorcolumn')
+    setlocal colorcolumn=80,100
+endif
