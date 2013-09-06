@@ -173,6 +173,8 @@ nnoremap <leader>ud :GundoToggle<cr>
 noremap <leader>st :SyntasticToggleMode<cr>
 noremap <leader>td <plug>TaskList
 
+noremap <leader>gs :Gstatus<cr>
+noremap <leader>gca :Gcommit -a<cr>
 "}}}
 
 " Printing "{{{
