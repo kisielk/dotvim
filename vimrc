@@ -217,6 +217,7 @@ let g:ctrlp_by_filename = 0
 
 let g:gundo_preview_bottom = 1
 
+let g:syntastic_aggregate_errors = 1
 let g:syntastic_python_flake8_args = '--ignore=E501'
 let g:syntastic_check_on_open = 1
 let g:syntastic_auto_loc_list = 1
