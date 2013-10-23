@@ -125,17 +125,6 @@ else
   endif
 endif
 
-
-" Function for toggling relative line numbering
-function! NumberToggle()
-  if(&relativenumber == 1)
-    set number
-  else
-    set relativenumber
-  endif
-endfunc
-
-
 "}}}
 
 " Keybindings "{{{
@@ -150,7 +139,7 @@ nnoremap <leader>lp :lprev<cr>
 noremap <leader>nh :nohl<cr>
 nnoremap <leader>tw :%s/\s\+$//<cr>
 noremap <leader>vr :vsplit $MYVIMRC<cr>
-nnoremap <leader>nn :call NumberToggle()<cr>
+nnoremap <leader>nn :set relativenumber!<cr>
 
 " Font resizing
 nnoremap <C-Up> :silent! let &guifont = substitute( &guifont, ':h\zs\d\+', '\=eval(submatch(0)+1)', '')<CR>
@@ -169,6 +158,7 @@ noremap <leader>nt :NERDTreeToggle<cr>
 nnoremap <leader>ud :GundoToggle<cr>
 noremap <leader>st :SyntasticToggleMode<cr>
 noremap <leader>td <plug>TaskList
+nnoremap <leader>tl :TlistToggle<cr>
 
 noremap <leader>gs :Gstatus<cr>
 noremap <leader>gca :Gcommit -a<cr>
