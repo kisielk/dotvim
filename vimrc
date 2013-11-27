@@ -45,7 +45,7 @@ set expandtab
 set shiftround "Round shifts to multiples of sw
 
 set modeline "Enable modeline parsing
-set modelines=1
+set modelines=5
 set autoindent
 set copyindent "Copy previous line's indent
 set number
@@ -114,15 +114,11 @@ set wildignore+=*/build/*,*/dist/*
 set list
 
 colorscheme solarized
-if has("gui_running")
-  set bg=light
-  set listchars=tab:»·,trail:.,extends:#,nbsp:.
-else
+set bg=light
+set listchars=tab:>.,trail:.,extends:#,nbsp:.
+if $COLORTERM == "gnome-terminal"
+  set t_Co=16
   set bg=dark
-  set listchars=tab:>.,trail:.,extends:#,nbsp:.
-  if $COLORTERM == "gnome-terminal"
-    set t_Co=16
-  endif
 endif
 
 "}}}
@@ -220,6 +216,9 @@ let g:vimclojure#WantNailgun = 1
 let grvimclojure#ParenRainbow = 1
 
 let g:ackprg = 'ag --nogroup --nocolor --column'
+if executable('goimports')
+  let g:gofmt_command = 'goimports'
+endif
 "}}}
 
 " OS-Specific "{{{
