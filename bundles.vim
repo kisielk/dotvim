@@ -9,6 +9,7 @@ Bundle "pangloss/vim-javascript"
 Bundle 'Lokaltog/vim-easymotion'
 Bundle 'Lokaltog/vim-powerline'
 Bundle 'altercation/vim-colors-solarized'
+Bundle 'dgryski/vim-godef'
 Bundle 'gmarik/vundle'
 Bundle 'jimenezrick/vimerl'
 Bundle 'kien/ctrlp.vim'
