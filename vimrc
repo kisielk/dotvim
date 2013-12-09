@@ -1,12 +1,15 @@
 " Basic Vim settings "{{{
 filetype on " workaround for OS X vim in case filetype is off later. Prevents it from exiting with non-0 status.
 
-source bundles.vim
+set nocompatible
+filetype off
 
 " Enable go plugins
 if exists("$GOROOT")
   set rtp+=$GOROOT/misc/vim/
 endif
+
+source ~/.vim/bundles.vim
 
 "}}}
 
