@@ -36,7 +36,7 @@ syn on
 " File Handling "{{{
 set nobackup " Backup file while writing but don't keep it
 set writebackup
-set dir=~/.vim/swap
+set dir=~/.vim/swap//
 set diffopt="filler,context:4" " Set some options for diffs
 set viminfo='1000,f1,:20,rA:,rB:,h
 "}}}
@@ -104,14 +104,16 @@ set pastetoggle=<F10>
 let mapleader=","
 let maplocalleader=","
 
+" Error checking
+nnoremap <leader>E :Errors<cr>
 nnoremap <leader>ll :ll<cr>
-nnoremap <leader>ln :lnext<cr>
-nnoremap <leader>lp :lprev<cr>
+nnoremap <leader>nn :lnext<cr>
+nnoremap <leader>pp :lprev<cr>
 
 noremap <leader>nh :nohl<cr>
 nnoremap <leader>tw :%s/\s\+$//<cr>
 noremap <leader>vr :vsplit $MYVIMRC<cr>
-nnoremap <leader>nn :set relativenumber!<cr>
+nnoremap <leader>nu :set relativenumber!<cr>
 
 " Font resizing
 nnoremap <C-Up> :silent! let &guifont = substitute( &guifont, ':h\zs\d\+', '\=eval(submatch(0)+1)', '')<CR>
@@ -181,8 +183,10 @@ let g:gundo_preview_bottom = 1
 
 let g:syntastic_aggregate_errors = 1
 let g:syntastic_python_flake8_args = '--ignore=E501'
-let g:syntastic_check_on_open = 1
-let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 0
+let g:syntastic_auto_loc_list = 2
+let g:syntastic_always_populate_loc_list = 1
+
 let g:syntastic_mode_map = { 'mode': 'active',
 \ 'active_filetypes': [],
 \ 'passive_filetypes': ['html'] }
