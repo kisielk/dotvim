@@ -191,6 +191,9 @@ let g:syntastic_mode_map = { 'mode': 'active',
 \ 'active_filetypes': [],
 \ 'passive_filetypes': ['html'] }
 let g:syntastic_go_checkers = ['govet', 'go']
+let g:syntastic_error_symbol = '✗'
+let g:syntastic_warning_symbol = '⚠'
+
 
 let g:vimclojure#WantNailgun = 1
 let grvimclojure#ParenRainbow = 1
