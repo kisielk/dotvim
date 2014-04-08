@@ -49,7 +49,7 @@ if has("gui_running")
   elseif has("x11")
     set guifont=DejaVu\ Sans\ Mono\ 10
   elseif has("gui_macvim")
-    set guifont=Source\ Code\ Pro:h12
+    set guifont=Menlo:h11
     " set guifont=Envy\ Code\ R:h13
     set fuopt=maxvert,maxhorz
   endif
@@ -194,14 +194,10 @@ let g:syntastic_go_checkers = ['govet', 'go']
 let g:syntastic_error_symbol = '✗'
 let g:syntastic_warning_symbol = '⚠'
 
-
 let g:vimclojure#WantNailgun = 1
 let grvimclojure#ParenRainbow = 1
 
 let g:ackprg = 'ag --nogroup --nocolor --column'
-if executable('goimports')
-  let g:gofmt_command = 'goimports'
-endif
 
 if executable('ag')
   " Use ag over grep
