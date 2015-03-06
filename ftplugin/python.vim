@@ -9,3 +9,5 @@ if has('gui_running')
 endif
 
 let python_highlight_all = 1
+set list
+set listchars=tab:>.,trail:.,extends:#,nbsp:.

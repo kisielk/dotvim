@@ -17,7 +17,6 @@ source ~/.vim/bundles.vim
 set nowrap "don't wrap
 set ts=4
 set sw=4
-set expandtab
 set shiftround "Round shifts to multiples of sw
 
 set modeline "Enable modeline parsing
@@ -49,7 +48,7 @@ if has("gui_running")
   elseif has("x11")
     set guifont=DejaVu\ Sans\ Mono\ 10
   elseif has("gui_macvim")
-    set guifont=Menlo:h11
+    set guifont=Monaco:h11
     " set guifont=Envy\ Code\ R:h13
     set fuopt=maxvert,maxhorz
   endif
@@ -62,8 +61,6 @@ endif
 set hlsearch " Turn on search highlight
 set incsearch " Incremental search
 set showmatch " Show matching brackets
-set ignorecase "Ignore case by default
-set smartcase "Don't ignore case if capitals are in the pattern
 "}}}
 
 " Interface "{{{
@@ -87,11 +84,9 @@ set wildmode=longest:full
 set wildignore+=*.pyc,*.pyo,*.swp,*.bak,*.o
 set wildignore+=*/.git/*,*/.hg/*,*/.svn/*
 set wildignore+=*/build/*,*/dist/*
-set list
 
 colorscheme solarized
 set bg=light
-set listchars=tab:>.,trail:.,extends:#,nbsp:.
 if $COLORTERM == "gnome-terminal"
   set t_Co=16
   set bg=dark
