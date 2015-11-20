@@ -1,28 +1,28 @@
 set nocompatible
 filetype off " Reset if set by a system-wide config
 
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
+call plug#begin('~/.vim/bundle')
 
-Bundle "hynek/vim-python-pep8-indent"
-Bundle "pangloss/vim-javascript"
-Bundle 'Lokaltog/vim-easymotion'
-Bundle 'Lokaltog/vim-powerline'
-Bundle 'altercation/vim-colors-solarized'
-Bundle 'fatih/vim-go'
-Bundle 'gmarik/vundle'
-Bundle 'jimenezrick/vimerl'
-Bundle 'kien/ctrlp.vim'
-Bundle 'mileszs/ack.vim'
-Bundle 'nathanaelkane/vim-indent-guides'
-Bundle 'scrooloose/nerdcommenter'
-Bundle 'scrooloose/nerdtree'
-Bundle 'scrooloose/syntastic'
-Bundle 'sjl/gundo.vim'
-Bundle 'tpope/vim-fugitive'
-Bundle 'vim-scripts/TaskList.vim'
-Bundle 'vim-scripts/VimClojure'
-Bundle 'vim-scripts/argtextobj.vim'
-Bundle 'vim-scripts/taglist.vim'
+Plug 'hynek/vim-python-pep8-indent'
+Plug 'pangloss/vim-javascript'
+Plug 'Lokaltog/vim-easymotion'
+Plug 'Lokaltog/vim-powerline'
+Plug 'altercation/vim-colors-solarized'
+Plug 'fatih/vim-go'
+Plug 'jimenezrick/vimerl'
+Plug 'kien/ctrlp.vim'
+Plug 'mileszs/ack.vim'
+Plug 'nathanaelkane/vim-indent-guides'
+Plug 'scrooloose/nerdcommenter'
+Plug 'scrooloose/nerdtree'
+Plug 'scrooloose/syntastic'
+Plug 'sjl/gundo.vim'
+Plug 'tpope/vim-fugitive'
+Plug 'vim-scripts/TaskList.vim'
+Plug 'vim-scripts/VimClojure'
+Plug 'vim-scripts/argtextobj.vim'
+Plug 'vim-scripts/taglist.vim'
+
+call plug#end()
 
 filetype plugin indent on " Enable filetype specific things
