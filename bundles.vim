@@ -11,7 +11,9 @@ Plug 'altercation/vim-colors-solarized'
 Plug 'fatih/vim-go'
 Plug 'jimenezrick/vimerl'
 Plug 'kien/ctrlp.vim'
+Plug 'maksimr/vim-jsbeautify'
 Plug 'mileszs/ack.vim'
+Plug 'mxw/vim-jsx'
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree'
@@ -22,6 +24,8 @@ Plug 'vim-scripts/TaskList.vim'
 Plug 'vim-scripts/VimClojure'
 Plug 'vim-scripts/argtextobj.vim'
 Plug 'vim-scripts/taglist.vim'
+Plug 'rhysd/vim-clang-format'
+Plug 'Shougo/neocomplete'
 
 call plug#end()
 

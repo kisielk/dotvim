@@ -48,7 +48,9 @@ if has("gui_running")
   elseif has("x11")
     set guifont=DejaVu\ Sans\ Mono\ 10
   elseif has("gui_macvim")
-    set guifont=Monaco:h11
+    set macligatures
+    set guifont=Menlo\ Regular:h12
+    " set guifont=Monaco:h11
     " set guifont=Envy\ Code\ R:h13
     set fuopt=maxvert,maxhorz
   endif
@@ -121,8 +123,8 @@ noremap <leader>hqd :new<cr>:read !hg qdiff<cr>:set ft=diff buftype=nofile<CR>gg
 noremap <leader>do :DiffOrig
 
 """ Plugins
-nnoremap <leader>c <plug>NERDCommenterToggle
-vnoremap <leader>c <plug>NERDCommenterToggle
+"nnoremap <leader>c <plug>NERDCommenterToggle
+"vnoremap <leader>c <plug>NERDCommenterToggle
 noremap <leader>nt :NERDTreeToggle<cr>
 nnoremap <leader>ud :GundoToggle<cr>
 noremap <leader>st :SyntasticToggleMode<cr>
@@ -149,6 +151,14 @@ autocmd! BufReadPost *
 
 " Reload vimrc after editing
 au! BufWritePost $MYVIMRC source $MYVIMRC
+
+autocmd FileType javascript noremap <buffer>  <leader>f :call JsBeautify()<cr>
+autocmd FileType json noremap <buffer> <leader>f :call JsonBeautify()<cr>
+autocmd FileType jsx noremap <buffer> <leader>f :call JsxBeautify()<cr>
+autocmd FileType javascript.jsx noremap <buffer>  <leader>f :call JsxBeautify()<cr>
+autocmd FileType html noremap <buffer> <leader>f :call HtmlBeautify()<cr>
+autocmd FileType css noremap <buffer> <leader>f :call CSSBeautify()<cr>
+
 ""}}}
 
 " Folding "{{{
@@ -188,6 +198,8 @@ let g:syntastic_mode_map = { 'mode': 'active',
 let g:syntastic_go_checkers = ['govet', 'go']
 let g:syntastic_error_symbol = '✗'
 let g:syntastic_warning_symbol = '⚠'
+let g:syntastic_javascript_checkers = ['eslint']
+let g:syntastic_javascript_eslint_args = '--config ' . expand('~/.eslintrc')
 
 let g:vimclojure#WantNailgun = 1
 let grvimclojure#ParenRainbow = 1
@@ -204,6 +216,9 @@ if executable('ag')
   " ag is fast enough that CtrlP doesn't need to cache
   let g:ctrlp_use_caching = 0
 endif
+
+let g:clang_format#auto_format = 1
+let g:clang_format#auto_formatexpr = 1
 "}}}
 
 " OS-Specific "{{{
