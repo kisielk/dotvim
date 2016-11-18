@@ -49,7 +49,7 @@ if has("gui_running")
     set guifont=DejaVu\ Sans\ Mono\ 10
   elseif has("gui_macvim")
     set macligatures
-    set guifont==Go\ Mono:h12,Menlo\ Regular:h12
+    set guifont=Go\ Mono:h12,Menlo\ Regular:h12
     " set guifont=Monaco:h11
     " set guifont=Envy\ Code\ R:h13
     set fuopt=maxvert,maxhorz
