@@ -49,7 +49,7 @@ if has("gui_running")
     set guifont=DejaVu\ Sans\ Mono\ 10
   elseif has("gui_macvim")
     set macligatures
-    set guifont=Go\ Mono:h12,Menlo\ Regular:h12
+    set guifont=Go\ Mono\ for\ Powerline:h12,Go\ Mono:h12,Menlo\ Regular:h12
     " set guifont=Monaco:h11
     " set guifont=Envy\ Code\ R:h13
     set fuopt=maxvert,maxhorz
@@ -221,6 +221,11 @@ let g:clang_format#auto_format = 1
 let g:clang_format#auto_formatexpr = 1
 
 let g:go_auto_sameids = 1
+
+if has("gui_running")
+  let g:airline_powerline_fonts = 1
+endif
+
 "}}}
 
 " OS-Specific "{{{
