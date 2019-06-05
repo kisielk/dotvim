@@ -32,6 +32,10 @@ set syntax=on
 syn on
 "}}}
 
+" Buffer Handling "{{{
+set hidden
+"}}}
+
 " File Handling "{{{
 set nobackup " Backup file while writing but don't keep it
 set writebackup
@@ -83,9 +87,9 @@ set sbr=">" "Line wrapping indicator
 set sft "Show full tag for completion
 set wildmenu "Turn on the 'wildmenu', extended menu for tab completion
 set wildmode=longest:full
-set wildignore+=*.pyc,*.pyo,*.swp,*.bak,*.o
+set wildignore+=*.pyc,*.pyo,*.swp,*.bak,*.o,*.d
 set wildignore+=*/.git/*,*/.hg/*,*/.svn/*
-set wildignore+=*/build/*,*/dist/*
+set wildignore+=*/build/*,*/dist/*,*/Build/*
 
 colorscheme solarized
 set bg=light
@@ -181,9 +185,6 @@ let NERDTreeMinimalUI = 1
 let NERDTreeChDirMode = 2
 let NERDSpaceDelims = 1
 
-let g:ctrlp_working_path_mode = 2
-let g:ctrlp_by_filename = 0
-
 let g:gundo_preview_bottom = 1
 
 let g:syntastic_aggregate_errors = 1
@@ -204,17 +205,16 @@ let g:syntastic_javascript_eslint_args = '--config ' . expand('~/.eslintrc')
 let g:vimclojure#WantNailgun = 1
 let grvimclojure#ParenRainbow = 1
 
-let g:ackprg = 'ag --nogroup --nocolor --column'
+let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
+let g:ctrlp_cmd = 'CtrlP :pwd'
+let g:ctrlp_use_caching = 0
 
 if executable('ag')
   " Use ag over grep
   set grepprg=ag\ --nogroup\ --nocolor
 
-  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
-  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+  let g:ackprg = 'ag --nogroup --nocolor --column'
 
-  " ag is fast enough that CtrlP doesn't need to cache
-  let g:ctrlp_use_caching = 0
 endif
 
 let g:clang_format#auto_format = 1
