@@ -92,11 +92,7 @@ set wildignore+=*/.git/*,*/.hg/*,*/.svn/*
 set wildignore+=*/build/*,*/dist/*,*/Build/*
 
 colorscheme solarized
-set bg=light
-if $COLORTERM == "gnome-terminal"
-  set t_Co=16
-  set bg=dark
-endif
+set bg=dark
 
 "}}}
 
